@@ -103,9 +103,9 @@ public class ShopManager : MonoBehaviour
 
     public void BuyLogs()
     {
-        if (log >= 5)
+        if (log >= 3)
         {
-            log -= 5;
+            log -= 3;
             logs += 1;
             RuntimeDataManager.Instance.Log = log;
             RuntimeDataManager.Instance.Logs = logs;
@@ -121,9 +121,9 @@ public class ShopManager : MonoBehaviour
 
     public void BuyHouse()
     {
-        if (logs >= 5)
+        if (logs >= 10)
         {
-            logs -= 5;
+            logs -= 10;
             PlayerPrefs.SetInt("Logs", logs);
 
             currentHouseIndex++;
