@@ -14,7 +14,6 @@ public class LeafsController : MonoBehaviour
     private float segmentHeight = 2f;
     private GameManager gameManager;
 
-    private int goodLeafCount = 0; 
     private List<GameObject> spawnedLeaves = new List<GameObject>();
 
     public Camera mainCamera;
@@ -28,8 +27,6 @@ public class LeafsController : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         nextSpawnY = sword.position.y + 6f;
-
-        goodLeafCount = PlayerPrefs.GetInt("GoodLeafCount", 0);
 
         soundEffectManager = SoundEffectManager.Instance;
     }
@@ -92,12 +89,8 @@ public class LeafsController : MonoBehaviour
                 if (spawnedLeaves[i].CompareTag("GoodLeaf"))
                 {
                     soundEffectManager.Hit();
-                    goodLeafCount++;
-                    Debug.Log("Good Leaves Hit: " + goodLeafCount);
-
-                    PlayerPrefs.SetInt("GoodLeafCount", goodLeafCount);
-                    PlayerPrefs.Save();
-
+                    RuntimeDataManager.Instance.GoodLeafCount++;
+                    Debug.Log("Good Leaves Hit: " + RuntimeDataManager.Instance.GoodLeafCount);
                 }
                 else if (spawnedLeaves[i].CompareTag("BadLeaf"))
                 {
@@ -132,7 +125,7 @@ public class LeafsController : MonoBehaviour
 
     public int GetGoodLeafCount()
     {
-        return goodLeafCount;
+        return RuntimeDataManager.Instance.GoodLeafCount;
     }
 
 }

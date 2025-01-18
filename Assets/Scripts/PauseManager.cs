@@ -9,13 +9,12 @@ public class PauseManager : MonoBehaviour
     public List<Sprite> swordSprites;
     public Image swordImage;
 
-    private int selectedSwordIndex = 0;
 
     SoundEffectManager soundEffectManager;
 
     void Start()
     {
-        selectedSwordIndex = PlayerPrefs.GetInt("SelectedSword", 0);
+        int selectedSwordIndex = RuntimeDataManager.Instance.SelectedSwordIndex;
         SetSword(selectedSwordIndex);
 
         soundEffectManager = FindObjectOfType<SoundEffectManager>();
@@ -25,21 +24,20 @@ public class PauseManager : MonoBehaviour
     private void SetSword(int index)
     {
         swordImage.sprite = swordSprites[index];
-        PlayerPrefs.SetInt("SelectedSword", selectedSwordIndex);
-        PlayerPrefs.Save();
+        RuntimeDataManager.Instance.SelectedSwordIndex = index;
     }
 
     public void NextSword()
     {
         soundEffectManager.Select();
-        selectedSwordIndex = (selectedSwordIndex + 1) % swordSprites.Count;
+        int selectedSwordIndex = (RuntimeDataManager.Instance.SelectedSwordIndex + 1) % swordSprites.Count;
         SetSword(selectedSwordIndex);
     }
 
     public void PreviousSword()
     {
         soundEffectManager.Select();
-        selectedSwordIndex = (selectedSwordIndex - 1 + swordSprites.Count) % swordSprites.Count;
+        int selectedSwordIndex = (RuntimeDataManager.Instance.SelectedSwordIndex - 1 + swordSprites.Count) % swordSprites.Count;
         SetSword(selectedSwordIndex);
     }
 

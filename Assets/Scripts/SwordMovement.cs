@@ -21,7 +21,8 @@ public class SwordMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         gameManager = FindObjectOfType<GameManager>();
 
-        
+        int selectedSwordIndex = RuntimeDataManager.Instance.SelectedSwordIndex;
+        SetSword(selectedSwordIndex);
     }
 
     private void SetSword(int index)
@@ -52,7 +53,7 @@ public class SwordMovement : MonoBehaviour
         }
 
 
-        int selectedSwordIndex = PlayerPrefs.GetInt("SelectedSword", 0);
+        int selectedSwordIndex = RuntimeDataManager.Instance.SelectedSwordIndex;
         SetSword(selectedSwordIndex);
     }
 

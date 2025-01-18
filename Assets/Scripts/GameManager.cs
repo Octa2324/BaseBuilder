@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 
         soundEffectManager = SoundEffectManager.Instance;
 
-        currentHouseIndex = PlayerPrefs.GetInt("CurrentHouseIndex", 0);
+        currentHouseIndex = RuntimeDataManager.Instance.CurrentHouseIndex;
 
         houses.Add(0, firstHouse);
         houses.Add(1, secondHouse);

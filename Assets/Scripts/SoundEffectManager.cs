@@ -104,12 +104,11 @@ public class SoundEffectManager : MonoBehaviour
 
     private void SaveMuteState()
     {
-        PlayerPrefs.SetInt("MuteState", isMuted ? 1 : 0);
-        PlayerPrefs.Save();
+        MusicData.Instance.SoundEffectsMute = isMuted ? 1 : 0;
     }
 
     private void LoadMuteState()
     {
-        isMuted = PlayerPrefs.GetInt("MuteState", 0) == 1;
+        isMuted = MusicData.Instance.SoundEffectsMute == 1;
     }
 }

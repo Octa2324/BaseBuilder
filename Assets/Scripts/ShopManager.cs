@@ -38,15 +38,12 @@ public class ShopManager : MonoBehaviour
 
     void Start()
     {
-        leafs = PlayerPrefs.GetInt("GoodLeafCount", 0);
+        leafs = RuntimeDataManager.Instance.GoodLeafCount;
+        money = RuntimeDataManager.Instance.Money;
+        log = RuntimeDataManager.Instance.Log;
+        logs = RuntimeDataManager.Instance.Logs;
 
-        money = PlayerPrefs.GetInt("Money", 0);
-
-        log = PlayerPrefs.GetInt("Log", 0);
-
-        logs = PlayerPrefs.GetInt("Logs", 0) +20;
-
-        currentHouseIndex = PlayerPrefs.GetInt("CurrentHouseIndex", 0);
+        currentHouseIndex = RuntimeDataManager.Instance.CurrentHouseIndex;
 
         houses.Add(0, firstHouse);
         houses.Add(1, secondHouse);
@@ -74,9 +71,8 @@ public class ShopManager : MonoBehaviour
         {
             leafs -= 5;
             money += 1;
-            PlayerPrefs.SetInt("GoodLeafCount", leafs);
-            PlayerPrefs.SetInt("Money", money);
-            PlayerPrefs.Save();
+            RuntimeDataManager.Instance.GoodLeafCount = leafs;
+            RuntimeDataManager.Instance.Money = money;
             soundEffectManager.Buy();
             UpdateUI();
         }
@@ -93,9 +89,8 @@ public class ShopManager : MonoBehaviour
         {
             money -= 5;
             log += 1;
-            PlayerPrefs.SetInt("Money", money);
-            PlayerPrefs.SetInt("Log", log);
-            PlayerPrefs.Save();
+            RuntimeDataManager.Instance.Money = money;
+            RuntimeDataManager.Instance.Log = log;
             soundEffectManager.Buy();
             UpdateUI();
         }
@@ -112,9 +107,8 @@ public class ShopManager : MonoBehaviour
         {
             log -= 5;
             logs += 1;
-            PlayerPrefs.SetInt("Log", log);
-            PlayerPrefs.SetInt("Logs", logs);
-            PlayerPrefs.Save();
+            RuntimeDataManager.Instance.Log = log;
+            RuntimeDataManager.Instance.Logs = logs;
             soundEffectManager.Buy();
             UpdateUI();
         }
@@ -136,8 +130,7 @@ public class ShopManager : MonoBehaviour
             if (currentHouseIndex >= houses.Count)
             {
                 currentHouseIndex = houses.Count - 1; // Cap at the last house
-                PlayerPrefs.SetInt("CurrentHouseIndex", currentHouseIndex);
-                PlayerPrefs.Save();
+                RuntimeDataManager.Instance.CurrentHouseIndex = currentHouseIndex;
 
                 soundEffectManager.Upgrade();
                 SetActiveHouse(currentHouseIndex);
@@ -147,8 +140,7 @@ public class ShopManager : MonoBehaviour
             }
             else
             {
-                PlayerPrefs.SetInt("CurrentHouseIndex", currentHouseIndex);
-                PlayerPrefs.Save();
+                RuntimeDataManager.Instance.CurrentHouseIndex = currentHouseIndex;
 
                 soundEffectManager.Upgrade();
                 SetActiveHouse(currentHouseIndex);

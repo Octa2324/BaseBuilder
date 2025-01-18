@@ -67,12 +67,11 @@ public class MusicManager : MonoBehaviour
 
     private void SaveMuteState()
     {
-        PlayerPrefs.SetInt("MuteMusicState", isMuted ? 1 : 0);
-        PlayerPrefs.Save();
+        MusicData.Instance.MusicMute = isMuted ? 1 : 0;
     }
 
     private void LoadMuteState()
     {
-        isMuted = PlayerPrefs.GetInt("MuteMusicState", 0) == 1;
+        isMuted = MusicData.Instance.MusicMute == 1;
     }
 }
